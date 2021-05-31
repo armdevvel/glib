@@ -368,20 +368,6 @@ if host_machine.system() != 'windows'
       'extra_sources' : ['gdbus-tests.c', 'test-io-stream.c', 'test-pipe-unix.c'],
     },
   }
-
-  # Generate test.mo from de.po using msgfmt
-  msgfmt = find_program('msgfmt', required : false)
-  if msgfmt.found()
-    subdir('de/LC_MESSAGES')
-    gio_tests += {
-      'gsettings' : {
-        'extra_sources' : [test_mo],
-        'c_args' : ['-DSRCDIR="@0@"'.format(meson.current_source_dir()),
-                    '-DTEST_LOCALE_PATH="@0@"'.format(test_mo_dir)],
-        'install' : false,
-      },
-    }
-  endif
 endif # unix
 
 #  Test programs buildable on Windows only
